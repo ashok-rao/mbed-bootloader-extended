@@ -755,6 +755,8 @@ int SPIFBlockDevice::_sfdp_parse_sfdp_headers(uint32_t& basic_table_addr, size_t
             basic_table_addr = ( (param_header[6] << 16) | (param_header[5] << 8) | (param_header[4]) );
             // Supporting up to 64 Bytes Table (16 DWORDS)
             basic_table_size = ((param_header[3] * 4) < SFDP_DEFAULT_BASIC_PARAMS_TABLE_SIZE_BYTES) ? (param_header[3] * 4) : 64;
+            tr_debug("****** Addr: 0x%xh , Size: %d \r\n ", basic_table_addr, (int)basic_table_size);
+            tr_debug("Param Hdr Data: 0x%xh 0x%xh 0x%xh 0x%xh", (int)param_header[6], (int)param_header[5], (int)param_header[4], (int)param_header[3]);
 
         } else if ((param_header[0] == 81) && (param_header[7] == 0xFF)) {
             // Found Sector Map Table: LSB=0x81, MSB=0xFF

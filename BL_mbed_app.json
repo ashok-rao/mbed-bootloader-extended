@@ -5,7 +5,7 @@
         "MAX_COPY_RETRIES=1",
         "MAX_BOOT_RETRIES=3",
         "ARM_BOOTLOADER_USE_NVSTORE_ROT=1",
-
+        "ARM_UC_USE_PAL_CRYPTO=0",
         "ARM_UC_USE_PAL_BLOCKDEVICE=1",
         "ARM_UC_PAAL_TRACE_ENABLE=0",
         "ARM_UC_PROFILE_MBED_CLOUD_CLIENT=1",
@@ -14,8 +14,7 @@
         "MBED_CLOUD_CLIENT_UPDATE_STORAGE=ARM_UCP_FLASHIAP_BLOCKDEVICE",
         "DEFAULT_MAX_APPLICATION_SIZE=(MBED_CONF_APP_FLASH_START_ADDRESS + MBED_CONF_APP_FLASH_SIZE - MBED_CONF_APP_APPLICATION_START_ADDRESS)",
         "DISABLE_ERROR_DESCRIPTION=1",
-        "Mutex=PlatformMutex",
-        "ARM_UC_ALL_TRACE_ENABLE=1"
+        "Mutex=PlatformMutex"
     ],
     "config": {
         "application-start-address": {
@@ -51,27 +50,6 @@
             "update-client.storage-size"       : "(1024*1024*2)",
             "update-client.storage-locations"  : 1,
             "update-client.firmware-header-version": "2"
-        },
-        "MTB_STM_L475": {
-            "target.components_add"            : ["SPIF"],
-            "flash-start-address"              : "0x08000000",
-            "flash-size"                       : "(1024*1024)",
-            "nvstore.area_1_address"           : "(MBED_CONF_APP_FLASH_START_ADDRESS + 1016*1024)",
-            "nvstore.area_1_size"              : "(4*1024)",
-            "nvstore.area_2_address"           : "(MBED_CONF_APP_FLASH_START_ADDRESS + 1020*1024)",
-            "nvstore.area_2_size"              : "(4*1024)",
-            "update-client.application-details": "(MBED_CONF_APP_FLASH_START_ADDRESS + 64*1024)",
-            "update-client.storage-address"    : "(1024*1024*3)",
-            "update-client.storage-size"       : "(1024*1024*1)",
-            "update-client.storage-locations"  : 1,
-            "update-client.storage-page" : 1,
-            "application-start-address"        : "(MBED_CONF_APP_FLASH_START_ADDRESS + 65*1024)",
-            "max-application-size"             : "DEFAULT_MAX_APPLICATION_SIZE",
-            "spif-driver.SPI_FREQ"             : 1000000,
-            "spif-driver.SPI_MOSI"             : "PB_5",
-            "spif-driver.SPI_MISO"             : "PA_6",
-            "spif-driver.SPI_CLK"              : "PA_5",
-            "spif-driver.SPI_CS"               : "PD_2"
         },
         "K64F": {
             "flash-start-address"              : "0x0",
@@ -271,6 +249,28 @@
             "spif-driver.SPI_MISO"             : "PC_2",
             "spif-driver.SPI_CLK"              : "PB_13",
             "spif-driver.SPI_CS"               : "PA_6"
+        },
+        "MTB_STM_L475": {
+            "target.components_add"            : ["SPIF"],
+            "target.clock_source"              : "USE_PLL_MSI",
+            "flash-start-address"              : "0x08000000",
+            "flash-size"                       : "(1024*1024)",
+            "nvstore.area_1_address"           : "(MBED_CONF_APP_FLASH_START_ADDRESS + MBED_CONF_APP_FLASH_SIZE - 2*(2*1024))",
+            "nvstore.area_1_size"              : "(2*1024)",
+            "nvstore.area_2_address"           : "(MBED_CONF_APP_FLASH_START_ADDRESS + MBED_CONF_APP_FLASH_SIZE - 1*(2*1024))",
+            "nvstore.area_2_size"              : "(2*1024)",
+            "update-client.application-details": "(MBED_CONF_APP_FLASH_START_ADDRESS + 64*1024)",
+            "update-client.storage-address"    : "(1024*1024*2)",
+            "update-client.storage-size"       : "(1024*1024*1)",
+            "update-client.storage-locations"  : 1,
+            "application-start-address"        : "(MBED_CONF_APP_FLASH_START_ADDRESS + 65*1024)",
+            "max-application-size"             : "DEFAULT_MAX_APPLICATION_SIZE",
+            "spif-driver.SPI_MOSI"             : "PB_5",
+            "spif-driver.SPI_MISO"             : "PA_6",
+            "spif-driver.SPI_CLK"              : "PA_5",
+            "spif-driver.SPI_CS"               : "PD_2"
         }
+
+
     }
 }
